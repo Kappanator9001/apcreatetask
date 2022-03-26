@@ -32,8 +32,8 @@ class textButton(pygame.Rect):
     pass
     #font.renderto(window, )
 class ellipseTextButton(textButton):
-  def __init__(self, rect, text = '', color = colors['black'], fontcolor = None):
-    super().__init__()
+  def __init__(self, x,y,width,height, text = '', color = colors['black'], fontcolor=  None):
+    super().__init__(x,y,width,height, text, color, fontcolor)
   def _drawButton(self, font):
     window = pygame.display.get_surface()
-    pygame.draw.ellipse(window, self.color, self.rect)
+    pygame.draw.ellipse(window, self.color, self)

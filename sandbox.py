@@ -1,4 +1,4 @@
-import pygame, pygame.freetype, sys
-sys.path.append('code')
+import pygame, pygame.freetype
+pygame.init()
 from buttons import *
 from utility import *

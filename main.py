@@ -8,7 +8,7 @@ invertColorsDefault = True
 gaming = True
 
 button = textButton(0,0,100,100)
-button2 = textButton(200,100,30,50, 'amogus', colors['cyan'])
+button2 = ellipseTextButton(200,100,30,50, 'amogus', colors['cyan'])
 while gaming: 
   for event in pygame.event.get():
         if event.type == pygame.QUIT:
