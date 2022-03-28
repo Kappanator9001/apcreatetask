@@ -1,7 +1,7 @@
 import pygame, pygame.freetype
 from utility import *
 pygame.init()
-
+defaultfont = pygame.freetype.Font("ComicSans.ttf", )
 class textButton(pygame.Rect):
   def __init__(self, x,y,width,height, text = '', color = colors['black'], fontcolor=  None):
     
@@ -15,11 +15,11 @@ class textButton(pygame.Rect):
     return string + self.text
   def tryClicked(self, x,y):
     rel_x, rel_y = x-self.x, y-self.y
-    clicked = rel_x>=0 and rel_x<=self.width and rel_y>=0 and rel_y<=self.height
+    clicked = all([rel_x>=0, rel_x<=self.width, rel_y>=0, rel_y<=self.height])
     if clicked: 
       self._click()
   def _click(self):
-    pass
+    print("clicked {}".format(self.text))
   def draw(self, fcolor = None):
     if fcolor == None:
       fcolor = self.fontcolor
@@ -34,6 +34,6 @@ class textButton(pygame.Rect):
 class ellipseTextButton(textButton):
   def __init__(self, x,y,width,height, text = '', color = colors['black'], fontcolor=  None):
     super().__init__(x,y,width,height, text, color, fontcolor)
-  def _drawButton(self, font):
+  def _drawButton(self):
     window = pygame.display.get_surface()
     pygame.draw.ellipse(window, self.color, self)
