@@ -3,7 +3,8 @@ pygame.init()
 colors = {
   'white': (255,255,255),
   'black' : (0,0,0),
-  'cyan' : (0,255,255)
+  'cyan' : (0,255,255),
+  'buttonbg': (255,255,255)
 }
 def invert(color):
     if type(color)==dict:

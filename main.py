@@ -7,18 +7,17 @@ w = pygame.display.set_mode([winSize, winSize])
 invertColorsDefault = True
 gaming = True
 
-button = textButton(0,0,100,100)
-button2 = ellipseTextButton(200,100,30,50, 'amogus', colors['cyan'])
-buttons = [button, button2]
+keyboard = Keyboard(0,500,winSize, 300)
 while gaming: 
   for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gaming = False
+        elif event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_d:
+            invert(colors)
         elif event.type == pygame.MOUSEBUTTONDOWN:
           x,y = pygame.mouse.get_pos()
-          for button in buttons:
-            button.tryClicked(x,y)
+          
   w.fill(colors['white'])
-  for button in buttons:
-    button.draw()
+  keyboard.draw()
   pygame.display.flip()
