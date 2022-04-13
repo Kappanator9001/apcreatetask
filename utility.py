@@ -4,8 +4,9 @@ colors = {
   'white': (255,255,255),
   'black' : (0,0,0),
   'cyan' : (0,255,255),
-  'buttonbg': (255,255,255)
+  'buttonbg': (0,0,0)
 }
+
 def invert(color):
     if type(color)==dict:
         for key in color:
@@ -34,3 +35,7 @@ def tupleSubtract(t1,t2):
 def tupleIndex(t,index):
     t=list(t)
     return t[index]
+def populate(lst, num):
+   for i in range(num):
+     lst.append([])
+   return lst
