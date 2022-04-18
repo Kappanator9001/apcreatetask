@@ -39,3 +39,7 @@ def populate(lst, num):
    for i in range(num):
      lst.append([])
    return lst
+def within(pos, obj):
+  x,y = pos
+  bounds=[x>obj.x, x<(obj.x+obj.width), y>obj.y, y<(obj.y+obj.height)]
+  return(all(bounds))

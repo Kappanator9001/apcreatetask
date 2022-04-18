@@ -2,7 +2,7 @@ import pygame
 from buttons import *
 from utility import *
 pygame.init()
-winSize = 800
+winSize = 500
 w = pygame.display.set_mode([winSize, winSize])
 invertColorsDefault = True
 if invertColorsDefault:
@@ -10,8 +10,8 @@ if invertColorsDefault:
 fileName = 'cache.txt'
 file = open(fileName, 'r')
 gaming = True
-
-keyboard = Keyboard(0,500,winSize, 300)
+c= pygame.time.Clock()
+keyboard = Keyboard(0,300,winSize, 200)
 while gaming: 
   for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -25,7 +25,12 @@ while gaming:
                 button.buttoncolor = colors['white']
         elif event.type == pygame.MOUSEBUTTONDOWN:
           x,y = pygame.mouse.get_pos()
-          #estimate row by y position, then use list slicing with countKeys to figure out what key is being pressed
+          if within((x,y), keyboard):
+            keyboard.click(x,y, "")
+          
+          
   w.fill(colors['white'])
   keyboard.draw()
+  c.tick(60)
   pygame.display.flip()
+file.close()
