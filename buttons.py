@@ -92,6 +92,11 @@ def specialClickBehavior(string, text):
   
   if text=='BACKSPC':
     return string[:len(string)-1]
-  return string
+  if text == 'TAB':
+    return string+'    '
+  if text == 'SPACE':
+    return string+' '
+  if text == '':
+    pass
 def renderText(text=''):
   pass
