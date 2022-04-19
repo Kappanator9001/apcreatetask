@@ -31,6 +31,7 @@ while gaming:
           
   w.fill(colors['white'])
   keyboard.draw()
+  renderText()
   c.tick(60)
   pygame.display.flip()
 file.close()
