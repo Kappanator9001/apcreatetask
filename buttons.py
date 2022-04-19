@@ -3,7 +3,8 @@ from utility import *
 pygame.init()
 defaultfont = pygame.freetype.Font("ComicSansMS.TTF", 12)
 defaultfont.origin = True
-special_click_cases = ['SPACE', 'BACKSPC', 'CAPS', 'SHIFT', 'SHIFT']
+special_click_cases = ['SPACE', 'BACKSPC', 'CAPS', 'SHIFT', 'ENTER', 'TAB']
+shift_caps = [False, False]
 class textButton(pygame.Rect):
   def __init__(self, x,y,width,height, text = ''):
     pygame.Rect.__init__(self, x,y,width,height)
@@ -21,12 +22,13 @@ class textButton(pygame.Rect):
   def _set_font_color(self, color):
     self._fontcolor = color
   fontcolor = property(_get_font_color,_set_font_color)
-  def add_text(self, string):
-    return string + self.text
-  def click(self, string=''):
-    print("clicked {}".format(self.text))
+  def click(self, string):
     if self.text in special_click_cases:
       return specialClickBehavior(string, self.text)
+    upper = (shift_caps[1]+shift_caps[0])%2
+    print(string)
+    if upper:
+      return string + self.text.upper()
     return string + self.text
   def draw(self, font = defaultfont, fcolor = None):
     if fcolor == None:
@@ -66,7 +68,8 @@ class Keyboard:
     row = self.keys[int((y-self.y)//self.keyHeight)]
     for button in row:
       if within((x,y),button):
-        button.click(string)
+        return button.click(string)
+    return string
       
     
 special_length_cases= {
@@ -88,15 +91,23 @@ def countKeys(lst):
     else: count+=special_length_cases[key]
       
   return count
+
 def specialClickBehavior(string, text):
-  
   if text=='BACKSPC':
     return string[:len(string)-1]
   if text == 'TAB':
     return string+'    '
   if text == 'SPACE':
     return string+' '
-  if text == '':
-    pass
-def renderText(text=''):
-  pass
+  if text == 'CAPS':
+    shift_caps[1] = not shift_caps[1]
+    return string
+  if text == 'SHIFT':
+    shift_caps[0] = not shift_caps[0]
+    return string
+  if text == 'ENTER':
+    return string+'\n'
+def renderText(text='', font = defaultfont):
+  w = pygame.display.get_surface()
+  font.origin = False
+  font.render_to(w, (0,0), text, colors['black'])
