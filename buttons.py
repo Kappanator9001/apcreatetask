@@ -9,7 +9,7 @@ class textButton(pygame.Rect):
   def __init__(self, x,y,width,height, text = ''):
     pygame.Rect.__init__(self, x,y,width,height)
     self._fontcolor = colors['black']
-    self._color = colors['white']
+    self._color = colors['black']
     self.text= text
   def _get_color(self):
     return self._color
@@ -26,7 +26,8 @@ class textButton(pygame.Rect):
     if self.text in special_click_cases:
       return specialClickBehavior(string, self.text)
     upper = (shift_caps[1]+shift_caps[0])%2
-    print(string)
+    if shift_caps[0]:
+      shift_caps[0] = False
     if upper:
       return string + self.text.upper()
     return string + self.text
@@ -37,9 +38,10 @@ class textButton(pygame.Rect):
     self._drawButton(self.window)
     self._drawText(self.window, font, fcolor)
   def _drawButton(self, window):
-    pygame.draw.rect(window, self._color, self)
+    pygame.draw.rect(window, self._color, self, 1)
   def _drawText(self,window, font=defaultfont, fontcolor = None):
     text_rect = font.get_rect(self.text)
+    font.origin=True
     font.render_to(window, tupleSubtract(self.center, (text_rect.width/2, 0)), self.text, fontcolor)
 
 class Keyboard: 
@@ -110,4 +112,6 @@ def specialClickBehavior(string, text):
 def renderText(text='', font = defaultfont):
   w = pygame.display.get_surface()
   font.origin = False
-  font.render_to(w, (0,0), text, colors['black'])
+  text= text.split('\n')
+  for line in text:
+    font.render_to(w, (0,text.index(line)*(font.size+1)), line, colors['black'])

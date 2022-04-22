@@ -10,7 +10,6 @@ if invertColorsDefault:
 string = ''
 with open('cache.txt', 'r') as file:
   for line in file:
-    print(line)
     string+=line
 
 gaming = True
@@ -26,7 +25,7 @@ while gaming:
             for row in keyboard.keys:
               for button in row:
                 button.fontcolor = colors['black']
-                button.buttoncolor = colors['white']
+                button.buttoncolor = colors['black']
         elif event.type == pygame.MOUSEBUTTONDOWN:
           x,y = pygame.mouse.get_pos()
           if within((x,y), keyboard):
