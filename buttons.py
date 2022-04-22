@@ -64,6 +64,7 @@ class textButton(pygame.Rect):
 #glorified array of buttons, modeled after the keyboard I am using on this pc
 class Keyboard: 
   def __init__(self, x, y, width, height):
+    #rows is just the rows of keys on my keyboard, each row being a list
     rows = [['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'BACKSPC'],['TAB', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],['CAPS', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", "ENTER"], ['SHIFT', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'SHIFT'], ['SPACE']]
     self.x = x
     self.y = y
